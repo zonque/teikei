@@ -16,6 +16,11 @@ ActiveAdmin.register Farm do
       f.input :contact_function
       f.input :url
     end
+
+    f.inputs "Farm commodities" do
+      f.input :commodities, as: :check_boxes
+    end
+
     f.buttons
   end
 

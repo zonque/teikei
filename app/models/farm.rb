@@ -14,6 +14,8 @@ class Farm < Place
   serialize :beverages, Array
   enumerize :beverages, in: %w{juice wine beer}, multiple: true
 
+  has_and_belongs_to_many :commodities
+
   resourcify
 
   before_validation :validate_url_format

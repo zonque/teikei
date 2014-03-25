@@ -3,6 +3,7 @@ class Commodity < ActiveRecord::Base
 
   belongs_to :commodity_group
   has_many :translations, :as => :translatable, :dependent => :destroy
+  has_and_belongs_to_many :farms
 
   attr_accessible :name, :priority, :translations_attributes, :commodity_group
   accepts_nested_attributes_for :translations

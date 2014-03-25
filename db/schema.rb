@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140325141826) do
+ActiveRecord::Schema.define(:version => 20140325180623) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(:version => 20140325141826) do
   end
 
   add_index "commodities", ["commodity_group_id"], :name => "index_commodities_on_commodity_group_id"
+
+  create_table "commodities_farms", :force => true do |t|
+    t.integer "commodity_id"
+    t.integer "farm_id"
+  end
 
   create_table "commodity_groups", :force => true do |t|
     t.string   "name"
