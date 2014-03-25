@@ -8,6 +8,7 @@ Teikei::Application.routes.draw do
       resources :farms, except: [:new, :edit]
       resources :depots, except: [:new, :edit]
       resources :places, only: [:index]
+      resources :commodities, only: [:index]
       resources :sessions, only: [:create, :destroy]
       resources :users, only: [:create, :show]
       resources :images, only: [:index, :show, :create, :destroy]
