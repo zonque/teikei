@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140323155659) do
+ActiveRecord::Schema.define(:version => 20140325141826) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -27,6 +27,23 @@ ActiveRecord::Schema.define(:version => 20140323155659) do
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "commodities", :force => true do |t|
+    t.integer  "commodity_group_id"
+    t.string   "name"
+    t.integer  "priority"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "commodities", ["commodity_group_id"], :name => "index_commodities_on_commodity_group_id"
+
+  create_table "commodity_groups", :force => true do |t|
+    t.string   "name"
+    t.integer  "priority"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "faqs", :force => true do |t|
     t.string   "question"
@@ -108,6 +125,17 @@ ActiveRecord::Schema.define(:version => 20140323155659) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "translations", :force => true do |t|
+    t.string   "title"
+    t.string   "locale"
+    t.integer  "translatable_id"
+    t.string   "translatable_type"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "translations", ["translatable_id"], :name => "index_translations_on_translatable_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
