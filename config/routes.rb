@@ -12,9 +12,9 @@ Teikei::Application.routes.draw do
       resources :sessions, only: [:create, :destroy]
       resources :users, only: [:create]
       resources :images, only: [:index, :show, :create, :destroy]
-      match "geocode" => 'geocoder#geocode'
+      get "geocode" => 'geocoder#geocode'
       resources :messages, only: [:index, :create]
-      match "send_message" => "place_messages#create"
+      get "send_message" => "place_messages#create"
     end
   end
 
@@ -23,11 +23,11 @@ Teikei::Application.routes.draw do
   root :to => "home#index"
   resources :contact_messages, only: [:new, :create]
 
-  match "contact" => "contact_messages#new"
+  get "contact" => "contact_messages#new"
 
-  match "terms" => "pages#terms"
-  match "about" => "pages#about"
-  match "imprint" => "pages#imprint"
+  get "terms" => "pages#terms"
+  get "about" => "pages#about"
+  get "imprint" => "pages#imprint"
 
   # Jasmine test engine
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
