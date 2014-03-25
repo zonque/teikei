@@ -297,6 +297,70 @@ namespace :db do
         puts "TextBlock '#{t[:name]}' (#{t[:locale]}) generated"
       end
 
+      [
+        { name: "vegetable products",
+          commodities: [
+            { name: "vegetables",
+              translations: [ { locale: "de", title: "Gemüse" } ] },
+            { name: "fruits",
+              translations: [ { locale: "de", title: "Obst" } ] },
+            { name: "mushrooms",
+              translations: [ { locale: "de", title: "Pilze" } ] },
+            { name: "cereals",
+              translations: [ { locale: "de", title: "Getreideprodukte" } ] },
+            { name: "bread_and_pastries",
+              translations: [ { locale: "de", title: "Brot und Backwaren" } ] },
+            { name: "spices",
+              translations: [ { locale: "de", title: "Gewürze" } ] },
+          ],
+          translations: [ { locale: "de", title: "Pflanzliche Produkte" } ],
+        },
+        { name: "animal products",
+          commodities: [
+            { name: "egg",
+              translations: [ { locale: "de", title: "Eier" } ] },
+            { name: "meat",
+              translations: [ { locale: "de", title: "Fleisch" } ] },
+            { name: "sausages",
+              translations: [ { locale: "de", title: "Wurstwaren" } ] },
+            { name: "milk",
+              translations: [ { locale: "de", title: "Milch" } ] },
+            { name: "diary",
+              translations: [ { locale: "de", title: "Milchprodukte (z.B. Butter, Käse, Joghurt)" } ] },
+            { name: "fish",
+              translations: [ { locale: "de", title: "Fisch" } ] },
+            { name: "honey",
+              translations: [ { locale: "de", title: "Honig" } ] },
+          ],
+          translations: [ { locale: "de", title: "Tierische Produkte" } ],
+        },
+        { name: "beverages",
+          commodities: [
+            { name: "juice",
+              translations: [ { locale: "de", title: "Saft" } ] },
+            { name: "wine",
+              translations: [ { locale: "de", title: "Wein" } ] },
+            { name: "beer",
+              translations: [ { locale: "de", title: "Bier" } ] },
+          ],
+          translations: [ { locale: "de", title: "Getränke" } ],
+        },
+      ].each do |cgt|
+        cg = CommodityGroup.create(name: cgt[:name])
+        cgt[:commodities].each do |ct|
+          c = Commodity.create(name: ct[:name])
+          ct[:translations].each do |t|
+            c.translations << Translation.create(locale: t[:locale], title: t[:title])
+          end
+          cg.commodities << c
+        end
+
+        cgt[:translations].each do |t|
+          cg.translations << Translation.create(locale: t[:locale], title: t[:title])
+        end
+
+      end
+
       puts "INVENTING SOME BOGUS FAQS"
       40.times do
         Faq.create(question: BetterLorem.w(5 + rand(10), true, true) + "?",
@@ -304,8 +368,6 @@ namespace :db do
                    enabled: true,
                    locale: 'de')
       end
-
     end
-
   end
 end
