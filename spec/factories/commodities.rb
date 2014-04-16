@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :commodity do
-    commodity_group nil
+    association :commodity_group
     name "MyString"
     priority 1
   end

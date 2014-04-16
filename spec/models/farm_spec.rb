@@ -237,4 +237,10 @@ describe Farm do
     expect(aggregated_places).not_to include(foreign_depot)
   end
 
+  it "can have commodities" do
+    c = create(:commodity)
+    farm.commodities << c
+    expect(farm.commodities.first.id).to eq(c.id)
+  end
+
 end
